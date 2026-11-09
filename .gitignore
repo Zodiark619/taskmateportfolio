@@ -1,0 +1,45 @@
+
+# =========================
+# React / Node.js / Vite
+# =========================
+**/node_modules/
+**/dist/
+**/.vite/
+
+# =========================
+# .NET / ASP.NET Core
+# =========================
+**/bin/
+**/obj/
+**/.vs/
+**/appsettings.Development.json
+
+# =========================
+# Environment variables / Secrets
+# =========================
+**/.env
+**/.env.*
+!**/.env.example
+**/secrets.json
+**/*.pfx
+**/*.key
+
+# =========================
+# IDE
+# =========================
+**/*.user
+**/*.suo
+**/.idea/
+
+# =========================
+# Logs / OS
+# =========================
+**/*.log
+.DS_Store
+Thumbs.db
+
+# =========================
+# Test / Coverage
+# =========================
+**/coverage/
+**/TestResults/
