@@ -1,48 +1,24 @@
-import React, { useState } from "react";
-import Hero from "./components/Hero";
-import TaskAdd from "./components/TaskAdd";
-import TaskList from "./components/TaskList";
-import { useTaskMateAll } from "./hook/taskmateHook";
-import { useDeleteTaskMate } from "./hook/taskmateHook";
-import toast, { Toaster } from "react-hot-toast";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import TaskMate from "./components/TaskMate/TaskMate";
+import Exercise from "./components/Exercise/Exercise";
+import Navbar from "./components/Navbar";
+import MovieMate from "./components/MovieMate/MovieMate";
+import MovieMateDetail from "./components/MovieMate/MovieMateDetail";
+
 const App = () => {
-  const {
-    data: TaskMateAll,
-    isLoading: isTaskMateLoading,
-    isError: isTaskMateError,
-  } = useTaskMateAll();
-  const deleteMutation = useDeleteTaskMate();
-
-  const [task, setTask] = useState({
-    id: 0,
-    name: "",
-  });
-  const editTaskmate = (selectedTask) => {
-    setTask((prev) => ({
-      ...prev,
-      id: selectedTask.id,
-      name: selectedTask.name,
-    }));
-  };
-  const deleteTaskmate = async (selectedTask) => {
-    await deleteMutation.mutateAsync(selectedTask.id);
-
-    toast.success("Task deleted successfully!");
-    setTask({
-      id: 0,
-      name: "",
-    });
-  };
   return (
-    <div className="bg-primary-subtle min-vh-100  ">
-      <Hero />
-      <TaskAdd task={task} />
-      <TaskList
-        data={TaskMateAll}
-        editTaskmate={editTaskmate}
-        deleteTaskmate={deleteTaskmate}
-      />
-    </div>
+    <>
+      <Navbar />
+      <div className="bg-primary-subtle min-vh-100  ">
+        <Routes>
+          <Route path="/" element={<TaskMate />}></Route>
+          <Route path="/exercise" element={<Exercise />}></Route>
+          <Route path="/moviemate" element={<MovieMate />}></Route>
+          <Route path="/moviemate/:id" element={<MovieMateDetail />}></Route>
+        </Routes>
+      </div>
+    </>
   );
 };
 
