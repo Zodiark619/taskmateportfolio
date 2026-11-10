@@ -6,16 +6,16 @@ export default async function handler(req, res) {
 
   try {
     let endpoint;
-
+    let response;
     if (id) {
       endpoint = `/movie/${id}`;
     } else if (search?.trim()) {
       endpoint = `/search/movie?query=${encodeURIComponent(search)}`;
+      response = await fetch(`${BASE_URL}${endpoint}&api_key=${API_KEY}`);
     } else {
       endpoint = `/movie/${selection || "popular"}`;
+      response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
     }
-
-    const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
 
     if (!response.ok) {
       return res.status(response.status).json({
