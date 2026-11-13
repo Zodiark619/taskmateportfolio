@@ -1,4 +1,4 @@
-﻿namespace taskmateAPI.Models.DTO
+﻿namespace taskmateAPI.Models.DTO.TaskMate
 {
     public class TaskMateUpdateDTO
     {

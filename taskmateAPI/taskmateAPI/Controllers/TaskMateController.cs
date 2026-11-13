@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using taskmateAPI.Data;
 using taskmateAPI.Models;
-using taskmateAPI.Models.DTO;
+using taskmateAPI.Models.DTO.TaskMate;
 
 namespace taskmateAPI.Controllers
 {
