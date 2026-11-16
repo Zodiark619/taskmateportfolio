@@ -1,9 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  // baseURL: "https://localhost:5001/api",
-  baseURL: import.meta.env.VITE_API_URL,
-  //withCredentials: true,
+   baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -11,8 +9,9 @@ export const api = axios.create({
 
 // Separate instance for authentication requests
 export const authApi = axios.create({
-  baseURL: "https://localhost:5001/api",
-  // withCredentials: true,
+   baseURL: import.meta.env.VITE_API_URL,
+
+   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },

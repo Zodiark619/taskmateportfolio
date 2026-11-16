@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using taskmateAPI.Models;
+using taskmateAPI.Models.Parking;
 
 namespace taskmateAPI.Data
 {
@@ -10,6 +11,8 @@ namespace taskmateAPI.Data
         public DbSet<TaskMate> TaskMate { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<RefreshToken> RefreshToken { get; set; }
+        public DbSet<ParkingSlot> ParkingSlot { get; set; }
+        public DbSet<ParkingOrder> ParkingOrder { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -41,6 +44,46 @@ namespace taskmateAPI.Data
                 }
             };
             modelBuilder.Entity<IdentityRole>().HasData(roles);
+
+
+            modelBuilder.Entity<ParkingSlot>().HasData(
+                new ParkingSlot
+                {
+                    Id=1,
+                    Area="A",
+                    SlotNumber="A1",
+                    Status="Available"
+                },
+                new ParkingSlot
+                {
+                    Id=2,
+                    Area="A",
+                    SlotNumber="A2",
+                    Status="Available"
+                },
+                new ParkingSlot
+                {
+                    Id=3,
+                    Area="B",
+                    SlotNumber="B1",
+                    Status="Available"
+                },
+                new ParkingSlot
+                {
+                    Id=4,
+                    Area="B",
+                    SlotNumber="B2",
+                    Status="Available"
+                },
+                new ParkingSlot
+                {
+                    Id=5,
+                    Area="C",
+                    SlotNumber="C1",
+                    Status="Available"
+                }
+                
+                );
         }
     }
 }

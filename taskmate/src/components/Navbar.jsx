@@ -1,7 +1,9 @@
-import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
+import { useAuth } from "../context/authContext";
 const Navbar = () => {
+   const { isAuthenticated, username, logout } = useAuth();
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -32,7 +34,7 @@ const Navbar = () => {
                   TaskMate
                 </NavLink>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink
                   className={({ isActive }) =>
                     `nav-link ${isActive ? "active" : ""}`
@@ -41,7 +43,9 @@ const Navbar = () => {
                 >
                   Exercise
                 </NavLink>
-              </li>
+              </li> */}
+                {isAuthenticated && (
+
               <li className="nav-item">
                 <NavLink
                   className={({ isActive }) =>
@@ -52,7 +56,24 @@ const Navbar = () => {
                   MovieMate
                 </NavLink>
               </li>
+                )}
             </ul>
+             {isAuthenticated ? (
+                          <div className="d-flex align-items-center gap-3">
+                            <span className="text-white">Welcome, {username}</span>
+
+                            <button
+                              className="btn btn-outline-light btn-sm"
+                              onClick={logout}
+                            >
+                              Logout
+                            </button>
+                          </div>
+                        ) : (
+                          <Link className="nav-link text-white" to="/login">
+                            Login
+                          </Link>
+                        )}
           </div>
         </div>
       </nav>

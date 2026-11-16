@@ -232,6 +232,103 @@ namespace taskmateAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("taskmateAPI.Models.Parking.ParkingOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CarNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("ParkingSlotId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParkingSlotId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ParkingOrder");
+                });
+
+            modelBuilder.Entity("taskmateAPI.Models.Parking.ParkingSlot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Area")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SlotNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ParkingSlot");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Area = "A",
+                            SlotNumber = "A1",
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Area = "A",
+                            SlotNumber = "A2",
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Area = "B",
+                            SlotNumber = "B1",
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Area = "B",
+                            SlotNumber = "B2",
+                            Status = "Available"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Area = "C",
+                            SlotNumber = "C1",
+                            Status = "Available"
+                        });
+                });
+
             modelBuilder.Entity("taskmateAPI.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -375,6 +472,30 @@ namespace taskmateAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("taskmateAPI.Models.Parking.ParkingOrder", b =>
+                {
+                    b.HasOne("taskmateAPI.Models.Parking.ParkingSlot", "ParkingSlot")
+                        .WithMany("ParkingOrders")
+                        .HasForeignKey("ParkingSlotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParkingSlot");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("taskmateAPI.Models.Parking.ParkingSlot", b =>
+                {
+                    b.Navigation("ParkingOrders");
                 });
 #pragma warning restore 612, 618
         }

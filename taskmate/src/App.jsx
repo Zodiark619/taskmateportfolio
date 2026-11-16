@@ -1,10 +1,11 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import TaskMate from "./components/TaskMate/TaskMate";
 import Exercise from "./components/Exercise/Exercise";
-import Navbar from "./components/Navbar";
+import Login from './components/Login';
 import MovieMate from "./components/MovieMate/MovieMate";
 import MovieMateDetail from "./components/MovieMate/MovieMateDetail";
+import Navbar from "./components/Navbar";
+import ProtectedRoute from './components/ProtectedRoute';
+import TaskMate from "./components/TaskMate/TaskMate";
 
 const App = () => {
   return (
@@ -14,8 +15,12 @@ const App = () => {
         <Routes>
           <Route path="/" element={<TaskMate />}></Route>
           <Route path="/exercise" element={<Exercise />}></Route>
+          <Route path="/login" element={<Login />} />
+
+ <Route element={<ProtectedRoute />}>
           <Route path="/moviemate" element={<MovieMate />}></Route>
           <Route path="/moviemate/:id" element={<MovieMateDetail />}></Route>
+ </Route>
         </Routes>
       </div>
     </>
