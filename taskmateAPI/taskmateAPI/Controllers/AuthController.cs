@@ -13,6 +13,7 @@ using taskmateAPI.Models.DTO.Auth;
 
 namespace taskmateAPI.Controllers
 {
+    //https://taskmateportfolio.onrender.com/api/auth/register
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
